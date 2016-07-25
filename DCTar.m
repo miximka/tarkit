@@ -166,8 +166,8 @@ static const char template_header[] = {
     //does decompression as needed (based on if the file ends .gz)
     NSFileManager *manager = [NSFileManager defaultManager];
     if([manager fileExistsAtPath:filePath]) {
-        NSDictionary *attributes = [manager attributesOfItemAtPath:filePath error:nil];
-        unsigned long long size = [attributes[NSFileSize] longLongValue];
+//        NSDictionary *attributes = [manager attributesOfItemAtPath:filePath error:nil];
+//        unsigned long long size = [attributes[NSFileSize] longLongValue];
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:filePath];
         
         if([filePath hasSuffix:@".gz"]) {
@@ -176,9 +176,9 @@ static const char template_header[] = {
             [manager removeItemAtPath:tarPath error:nil];
             if([self fileInflate:fileHandle isGzip:YES toPath:tarPath]) {
                 [fileHandle closeFile];
-                attributes = [manager attributesOfItemAtPath:tarPath error:nil];
-                size = [attributes[NSFileSize] longLongValue];
-                fileHandle = [NSFileHandle fileHandleForReadingAtPath:tarPath];
+//                attributes = [manager attributesOfItemAtPath:tarPath error:nil];
+//                size = [attributes[NSFileSize] longLongValue];
+//                fileHandle = [NSFileHandle fileHandleForReadingAtPath:tarPath];
                 filePath = tarPath;
             }
         }
@@ -680,7 +680,7 @@ static int format_octal(int64_t v, char *p, int s)
             else if(status == Z_BUF_ERROR)
                 continue;
             else if (status != Z_OK) {
-                done = YES;
+//                done = YES;
                 return NO;
             }
             NSInteger have = chunkSize - strm.avail_out;
@@ -787,7 +787,7 @@ static int format_octal(int64_t v, char *p, int s)
             else if(status == Z_BUF_ERROR)
                 continue;
             else if (status != Z_OK) {
-                done = YES;
+//                done = YES;
                 return NO;
             }
             NSInteger have = chunkSize - strm.avail_out;
